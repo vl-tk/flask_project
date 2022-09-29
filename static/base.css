@@ -1,0 +1,16 @@
+.menu {
+  font-weight: bold;
+}
+
+.menu {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.menu a {
+  display: inline-block;
+}
+
+.better_look {
+  background-color: #f7fcea;
+}
