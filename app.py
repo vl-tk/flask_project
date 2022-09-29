@@ -25,11 +25,11 @@ from flask_admin.contrib.sqla import ModelView
 from database import db  # isort:skip
 
 from apps.main_app import main
-from apps.api_app import api
-from apps.students_app import students
-from apps.demo_app import demo
+# from apps.api_app import api
+# from apps.students_app import students
+# from apps.demo_app import demo
 from apps.auth_app import auth
-from apps.forms_app import forms_demo
+# from apps.forms_app import forms_demo
 
 # import ssl
 # context = ssl.SSLContext()
@@ -46,10 +46,10 @@ secure_headers = SecureHeaders()
 def register_blueprints(app):
     app.register_blueprint(main, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
-    app.register_blueprint(api, url_prefix="/api/v1")
-    app.register_blueprint(demo, url_prefix="/demo")
-    app.register_blueprint(students, url_prefix="/students")
-    app.register_blueprint(forms_demo, url_prefix="/forms")
+    # app.register_blueprint(api, url_prefix="/api/v1")
+    # app.register_blueprint(demo, url_prefix="/demo")
+    # app.register_blueprint(students, url_prefix="/students")
+    # app.register_blueprint(forms_demo, url_prefix="/forms")
 
 
 def create_app(config=config.BaseConfig):
@@ -147,53 +147,53 @@ def init_admin(app, db):
 
     admin_panel.add_view(CustomUserView(User, db.session))
 
-    from apps.students_app.models import Student, Exam, Course, Teacher
+    # from apps.students_app.models import Student, Exam, Course, Teacher
 
-    admin_panel.add_view(MyModelView(Course, db.session, category="Education"))
-    admin_panel.add_view(MyModelView(Exam, db.session, category="Education"))
+    # admin_panel.add_view(MyModelView(Course, db.session, category="Education"))
+    # admin_panel.add_view(MyModelView(Exam, db.session, category="Education"))
 
-    from apps.students_app.admin import CustomStudentView, CustomTeacherView
+    # from apps.students_app.admin import CustomStudentView, CustomTeacherView
 
-    admin_panel.add_view(
-        CustomStudentView(
-            Student, db.session, category="Education", name="student_view"
-        )
-    )
-    admin_panel.add_view(CustomTeacherView(Teacher, db.session, category="Education"))
+    # admin_panel.add_view(
+    #     CustomStudentView(
+    #         Student, db.session, category="Education", name="student_view"
+    #     )
+    # )
+    # admin_panel.add_view(CustomTeacherView(Teacher, db.session, category="Education"))
 
-    from apps.demo_app.models import (
-        Ticket,
-        Booking,
-        AircraftsDatum,
-        AirportsDatum,
-        Flight,
-        Seat,
-        TicketFlight,
-        BoardingPass,
-    )
+    # from apps.demo_app.models import (
+    #     Ticket,
+    #     Booking,
+    #     AircraftsDatum,
+    #     AirportsDatum,
+    #     Flight,
+    #     Seat,
+    #     TicketFlight,
+    #     BoardingPass,
+    # )
 
-    admin_panel.add_view(MyModelView(Booking, db.session, category="AirDB"))
-    admin_panel.add_view(MyModelView(AircraftsDatum, db.session, category="AirDB"))
-    admin_panel.add_view(MyModelView(AirportsDatum, db.session, category="AirDB"))
-    admin_panel.add_view(MyModelView(Flight, db.session, category="AirDB"))
+    # admin_panel.add_view(MyModelView(Booking, db.session, category="AirDB"))
+    # admin_panel.add_view(MyModelView(AircraftsDatum, db.session, category="AirDB"))
+    # admin_panel.add_view(MyModelView(AirportsDatum, db.session, category="AirDB"))
+    # admin_panel.add_view(MyModelView(Flight, db.session, category="AirDB"))
 
-    from apps.demo_app.admin import (
-        CustomTicketView,
-        CustomTicketFlightView,
-        CustomBoardingPass,
-    )
+    # from apps.demo_app.admin import (
+    #     CustomTicketView,
+    #     CustomTicketFlightView,
+    #     CustomBoardingPass,
+    # )
 
-    admin_panel.add_view(CustomTicketView(Ticket, db.session, category="AirDB"))
-    admin_panel.add_view(
-        CustomTicketFlightView(TicketFlight, db.session, category="AirDB")
-    )
-    admin_panel.add_view(CustomBoardingPass(BoardingPass, db.session, category="AirDB"))
+    # admin_panel.add_view(CustomTicketView(Ticket, db.session, category="AirDB"))
+    # admin_panel.add_view(
+    #     CustomTicketFlightView(TicketFlight, db.session, category="AirDB")
+    # )
+    # admin_panel.add_view(CustomBoardingPass(BoardingPass, db.session, category="AirDB"))
 
-    from apps.forms_app.models import Race, Lap
-    from apps.forms_app.admin import CustomRaceView, CustomLapView
+    # from apps.forms_app.models import Race, Lap
+    # from apps.forms_app.admin import CustomRaceView, CustomLapView
 
-    admin_panel.add_view(CustomRaceView(Race, db.session, category="FormsDemo"))
-    admin_panel.add_view(CustomLapView(Lap, db.session, category="FormsDemo"))
+    # admin_panel.add_view(CustomRaceView(Race, db.session, category="FormsDemo"))
+    # admin_panel.add_view(CustomLapView(Lap, db.session, category="FormsDemo"))
 
 
 app = create_app()
@@ -201,7 +201,7 @@ db.init_app(app)
 
 csrf = CSRFProtect()
 csrf.init_app(app)
-csrf.exempt(api)  # we use JWT for API protection
+# csrf.exempt(api)  # we use JWT for API protection
 
 # enable CORS
 """
@@ -228,7 +228,7 @@ def get_locale():
 
 init_admin(app, db)
 
-if not Path(config.BaseConfig.DB_PATH).exists():
+if hasattr(config.BaseConfig, 'DB_PATH') and not Path(config.BaseConfig.DB_PATH).exists():
     from utils import build_sample_db
 
     """

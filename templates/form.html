@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% from "_macro_render_field.html" import render_field %}
+
+{% block content %}
+
+    <div class="my-form-container">
+        <form action="" method="POST" class="super-form">
+
+            {{ form.csrf_token }}
+
+            <h1>Please, enter your information below</h1>
+
+            <dl>
+                {{ render_field(form.text) }}
+                {{ render_field(form.my_checkbox) }}
+                {{ render_field(form.submit) }}
+            </dl>
+
+        </form>
+    </div>
+
+{% endblock %}

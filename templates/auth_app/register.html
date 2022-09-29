@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="my-form-container">
+
+        <form action="" method="POST" class="super-form">
+            {{ form.csrf_token }}
+
+            <h5>Регистрация</h5>
+
+            <dl>
+
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                {% if not field.errors %}
+                    <div>
+                        <strong>{{ field.label }}</strong>  {{ field(size=80, class_='form-control') }}
+                    </div>
+                {% else %}
+                    <div class="has-error">
+                        <strong>{{ field.label }}</strong>  {{ field(size=80, class_='form-control') }}
+                    </div>
+                    <span style="color: red;">
+                        {% for error in field.errors %}
+                            {{ error }}
+                            {% if not loop.last %}<br />{% endif %}
+                        {% endfor %}
+                    </span>
+                {% endif %}
+            {% endfor %}
+
+            </dl>
+
+            <input type="submit" class="btn btn-primary" value="Зарегистрироваться" />
+        </form>
+
+    </div>
+
+{% endblock %}
+
+
