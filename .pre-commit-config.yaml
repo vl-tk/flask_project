@@ -1,0 +1,83 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    -   id: trailing-whitespace
+        files: '.py'
+    -   id: check-yaml
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-builtin-literals
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: pretty-format-json
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: check-toml
+    -   id: check-vcs-permalinks
+    -   id: check-xml
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: destroyed-symlinks
+    -   id: detect-private-key
+    -   id: fix-encoding-pragma
+    -   id: mixed-line-ending
+    -   id: name-tests-test
+        args: ['--django']  # match test*py
+    -   id: requirements-txt-fixer
+    -   id: sort-simple-yaml
+    -   id: trailing-whitespace
+
+# -   repo: https://github.com/psf/black
+#     rev: 20.8b1
+#     hooks:
+#     -   id: black
+
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: '3.8.4'  # pick a git hash / tag to point to
+    hooks:
+    -   id: flake8
+        files: '.py'
+        args:
+          # http://flake8.pycqa.org/en/latest/user/error-codes.html
+          # https://pycodestyle.readthedocs.io/en/latest/intro.html#error-codes
+          - --ignore=F401,F841
+
+# -   repo: https://github.com/asottile/reorder_python_imports
+#     rev: v2.4.0
+#     hooks:
+#     -   id: reorder-python-imports
+
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+    rev: v1.0.4
+    hooks:
+    -   id: python-bandit-vulnerability-check
+        args: []
+        exclude: ^tests/
+        files: .py$
+
+# -   repo: https://github.com/FalconSocial/pre-commit-mirrors-pep257
+#     rev: v0.3.3  # Use the sha / tag you want to point at
+#     hooks:
+#     -   id: pep257
+
+# -   repo: local
+#     hooks:
+#         -   id: tests
+#             name: run tests
+#             entry: env/bin/pytest -v
+#             language: python
+#             additional_dependencies: [pre-commit, pytest]
+#             always_run: true
+#             pass_filenames: false
+#             types: [python]
+#             stages: [commit]
+
+# -   repo: local
+#     hooks:
+#         -   id: tests
+#             name: run tests
+#             entry: env/bin/pytest -x
+#             language: system
+#             types: [python]
+#             stages: [push]
